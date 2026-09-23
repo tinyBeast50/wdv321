@@ -11,7 +11,14 @@
 			margin-left: 20px;
 			padding: 10px;
 		}
+
+		.hidden {
+			display: none;
+		}
+
+		
 	</style>
+	<script src="script.js" defer></script>
 </head>
 
 <body>
@@ -35,7 +42,7 @@
 	<h4>Customer Service Complaints:</h4>
 	<p>
 		<label>Reason For Contact:
-			<select name="contactType" id="contactType">
+			<select name="contactType" id="contactType" class="hidden">
 				<option value="">Select Reason</option>
 				<option value="C">Complaints</option>
 				<option value="T">Technical Problems</option>
@@ -44,7 +51,7 @@
 		</label>
 	</p>
 	<section class="displayContainer">
-		<div id="complaints">
+		<div id="C" class="hidden">
 			<p>
 				<h4>Complaint:</h4>
 					<select name="complaintList" id="conplaintList">
@@ -58,7 +65,7 @@
 			</p>
 		</div>
 
-		<div id="technicalProblems">
+		<div id="T" class="hidden">
 			<p>
 				<h4>Technical Problems:</h4>
 				<label>
@@ -83,7 +90,7 @@
 			</p>
 		</div>
 
-		<div id="productIssues">
+		<div id="P" class="hidden">
 			<p>
 			<h4>Product Issues:</h4>
 
@@ -115,17 +122,6 @@
 	</section>
 	<p>&nbsp;</p>
 
-	<script>
-		
-		const complaints = document.getElementById("complaints");
-		const technicalProblems = document.getElementById("technicalProblems");
-		const productIssues = document.getElementById("ProductIssues");
-		
-		conplaints.style.display = "none";
-		technicalProblems.style.display = "none";
-		productIssues.style.display = "none";
-
-	</script>
 </body>
 
 </html>
