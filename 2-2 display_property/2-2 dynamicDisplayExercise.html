@@ -15,8 +15,6 @@
 		.hidden {
 			display: none;
 		}
-
-		
 	</style>
 	<script src="script.js" defer></script>
 </head>
@@ -42,7 +40,7 @@
 	<h4>Customer Service Complaints:</h4>
 	<p>
 		<label>Reason For Contact:
-			<select name="contactType" id="contactType" class="hidden">
+			<select name="contactType" id="contactType">
 				<option value="">Select Reason</option>
 				<option value="C">Complaints</option>
 				<option value="T">Technical Problems</option>
@@ -51,37 +49,40 @@
 		</label>
 	</p>
 	<section class="displayContainer">
-		<div id="C" class="hidden">
+
+		<div id="C" style.display = "none">
+
+			<h4>Complaint:</h4>
 			<p>
-				<h4>Complaint:</h4>
-					<select name="complaintList" id="conplaintList">
-						<option value="">Select a complaint</option>
-						<option value="customerService">Poor Customer Service</option>
-						<option value="billing">Incorrect Billing</option>
-						<option value="delivery">Late delivery</option>
-						<option value="product">Missing Product</option>
-					</select>
+				<select name="complaintList" id="conplaintList">
+					<option value="">Select a complaint</option>
+					<option value="customerService">Poor Customer Service</option>
+					<option value="billing">Incorrect Billing</option>
+					<option value="delivery">Late delivery</option>
+					<option value="product">Missing Product</option>
+				</select>
 				</label>
 			</p>
 		</div>
 
-		<div id="T" class="hidden">
+		<div id="T" style.display = "none">
+
+			<h4>Technical Problems:</h4>
 			<p>
-				<h4>Technical Problems:</h4>
 				<label>
 					<input type="checkbox" name="technical" value="internet">
 					Internet Connection Problems
-				</label>
+				</label><br>
 
 				<label>
 					<input type="checkbox" name="technical" value="login">
 					Login Problems
-				</label>
+				</label><br>
 
 				<label>
 					<input type="checkbox" name="technical" value="software">
 					Software Problems
-				</label>
+				</label><br>
 
 				<label>
 					<input type="checkbox" name="technical" value="password">
@@ -90,33 +91,33 @@
 			</p>
 		</div>
 
-		<div id="P" class="hidden">
-			<p>
+		<div id="P" style.display = "none">
+
 			<h4>Product Issues:</h4>
+			<p>
+				<label>
+					<input type="radio" name="productIssue" value="damaged">
+					Damaged Product
 
-			<label>
-				<input type="radio" name="productIssue" value="damaged">
-				Damaged Product
+				</label><br>
 
-			</label>
+				<label>
+					<input type="radio" name="productIssue" value="missing">
+					Missing Parts
 
-			<label>
-				<input type="radio" name="productIssue" value="missing">
-				Missing Parts
+				</label><br>
 
-			</label>
+				<label>
+					<input type="radio" name="productIssue" value="wrong">
+					Wrong Product
 
-			<label>
-				<input type="radio" name="productIssue" value="wrong">
-				Wrong Product
+				</label><br>
 
-			</label>
+				<label>
+					<input type="radio" name="productIssue" value="defective">
+					Defective Product
 
-			<label>
-				<input type="radio" name="productIssue" value="defective">
-				Defective Product
-
-			</label>
+				</label>
 			</p>
 		</div>
 	</section>
