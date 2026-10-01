@@ -21,10 +21,10 @@ const complaintOption = document.createElement("option");
 complaintOption.value = "complaint";
 complaintOption.textContent = "Complaint";
 
-const complimentOption = document.createElement("option");
+const technicalOption = document.createElement("option");
 
-complimentOption.value = "compliment";
-complimentOption.textContent = "Compliment";
+technicalOption.value = "technical";
+technicalOption.textContent = "Technical Issues";
 
 const questionOption = document.createElement("option");
 
@@ -33,8 +33,8 @@ questionOption.textContent = "General Question";
 
 reasonSelect.add(defaultOption);
 reasonSelect.add(complaintOption);
+reasonSelect.add(technicalOption);
 reasonSelect.add(questionOption);
-reasonSelect.add(complimentOption);
 
 dynamicContent.add(reasonLabel);
 dynamicContent.add(reasonSelect);
