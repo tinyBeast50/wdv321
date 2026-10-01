@@ -34,6 +34,7 @@ questionOption.textContent = "General Question";
 reasonSelect.add(defaultOption);
 reasonSelect.add(complaintOption);
 reasonSelect.add(questionOption);
+reasonSelect.add(complimentOption);
 
 dynamicContent.add(reasonLabel);
 dynamicContent.add(reasonSelect);
