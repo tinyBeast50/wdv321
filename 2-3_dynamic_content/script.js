@@ -26,15 +26,10 @@ const technicalOption = document.createElement("option");
 technicalOption.value = "technical";
 technicalOption.textContent = "Technical Issues";
 
-const questionOption = document.createElement("option");
-
-questionOption.value = "question";
-questionOption.textContent = "General Question";
-
 reasonSelect.add(defaultOption);
 reasonSelect.add(complaintOption);
 reasonSelect.add(technicalOption);
-reasonSelect.add(questionOption);
+
 
 dynamicContent.add(reasonLabel);
 dynamicContent.add(reasonSelect);
