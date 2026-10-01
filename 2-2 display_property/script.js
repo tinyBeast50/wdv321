@@ -23,4 +23,6 @@ document.getElementById("contactType").addEventListener("change", (event) => {
 
     resetDisplay();
     updateDisplay(selectedItem);
-})
+});
+
+window.addEventListener("load", resetDisplay);
