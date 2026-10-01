@@ -21,22 +21,27 @@ const complaintOption = document.createElement("option");
 complaintOption.value = "complaint";
 complaintOption.textContent = "Complaint";
 
+const complimentOption = document.createElement("option");
+
+complimentOption.value = "compliment";
+complimentOption.textContent = "Compliment";
+
 const questionOption = document.createElement("option");
 
 questionOption.value = "question";
 questionOption.textContent = "General Question";
 
-reasonSelect.appendChild(defaultOption);
-reasonSelect.appendChild(complaintOption);
-reasonSelect.appendChild(questionOption);
+reasonSelect.add(defaultOption);
+reasonSelect.add(complaintOption);
+reasonSelect.add(questionOption);
 
-dynamicContent.appendChild(reasonLabel);
-dynamicContent.appendChild(reasonSelect);
+dynamicContent.add(reasonLabel);
+dynamicContent.add(reasonSelect);
 
 const contactHeading = document.createElement("h3");
 contactHeading.textContent = "Preferred Contact Method";
 
-dynamicContent.appendChild(contactHeading);
+dynamicContent.add(contactHeading);
 
 const emailRadio = document.createElement("input");
 
@@ -50,9 +55,9 @@ const emailLabel = document.createElement("label");
 emailLabel.setAttribute("for", "email");
 emailLabel.textContent = "Email";
 
-dynamicContent.appendChild(emailRadio);
-dynamicContent.appendChild(emailLabel);
-dynamicContent.appendChild(document.createElement("br"));
+dynamicContent.add(emailRadio);
+dynamicContent.add(emailLabel);
+dynamicContent.add(document.createElement("br"));
 
 const phoneRadio = document.createElement("input");
 
@@ -66,9 +71,9 @@ const phoneLabel = document.createElement("label");
 phoneLabel.setAttribute("for", "phone");
 phoneLabel.textContent = "Phone";
 
-dynamicContent.appendChild(phoneRadio);
-dynamicContent.appendChild(phoneLabel);
-dynamicContent.appendChild(document.createElement("br"));
+dynamicContent.add(phoneRadio);
+dynamicContent.add(phoneLabel);
+dynamicContent.add(document.createElement("br"));
 
 const textRadio = document.createElement("input");
 
@@ -82,13 +87,13 @@ const textLabel = document.createElement("label");
 textLabel.setAttribute("for", "text");
 textLabel.textContent = "Text";
 
-dynamicContent.appendChild(textRadio);
-dynamicContent.appendChild(textLabel);
+dynamicContent.add(textRadio);
+dynamicContent.add(textLabel);
 
 const messageDiv = document.createElement("div");
 
 messageDiv.id = "messageBox";
 messageDiv.textContent = "Thank you for contacting us. Please select a reason for contacting us and your preferred contact method.";
 
-dynamicContent.appendChild(messageDiv);
+dynamicContent.add(messageDiv);
 
