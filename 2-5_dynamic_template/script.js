@@ -5,12 +5,12 @@ const addStudentButton = document.getElementById("addStudent");
 let studentCount = 3;
 
 function addStudent() {
+    
     const newStudent = studentTemplate.content.cloneNode(true);
 
     studentCount++;
 
     const studentName = newStudent.querySelector("#studentName");
-
     const studentID = newStudent.querySelector("#studentID");
 
     studentName.id = "studentName" + studentCount;
@@ -21,5 +21,7 @@ function addStudent() {
     studentID.name = "studentName" + studentCount;
     studentID.previousElementSibling.htmlFor =studentName.id;
 
-    addStudentButton.addEventListener("click", addStudent);
+    studentContainer.addEventListener(newStudent);
 }
+
+ addStudentButton.addEventListener("click", addStudent);
