@@ -17,11 +17,11 @@ function addStudent() {
     studentName.name = "studentName" + studentCount;
     studentName.previousElementSibling.htmlFor =studentName.id;
 
-    studentID.id = "studentId" + studentCount;
-    studentID.name = "studentName" + studentCount;
-    studentID.previousElementSibling.htmlFor =studentName.id;
+    studentID.id = "studentID" + studentCount;
+    studentID.name = "studentID" + studentCount;
+    studentID.previousElementSibling.htmlFor = studentID.id;
 
-    studentContainer.addEventListener(newStudent);
+    studentContainer.add(newStudent);
 }
 
  addStudentButton.addEventListener("click", addStudent);
