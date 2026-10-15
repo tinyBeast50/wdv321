@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Template Exercise</title>
+
+    <script src="script.js" defer></script>
     <style>
         #container {
             width:80%;
@@ -38,11 +40,11 @@
         <form method="post" action="#">
             <fieldset>
                 <legend>Student Registration Process:</legend>
-                    <section>
+                    <section id="studentContainer">
                         <div class="studentInputLine">
                             <div>
                                 <label for="studentName1">Student Name: </label>
-                                <input type="text" namd="studentName1" id="studentName1">                        
+                                <input type="text" name="studentName1" id="studentName1">                        
                             </div>
                             <div>
                                 <label for="studentID1">Student ID: </label>
@@ -52,7 +54,7 @@
                         <div class="studentInputLine">
                             <div>
                                 <label for="studentName2">Student Name: </label>
-                                <input type="text" namd="studentName2" id="studentName2">                        
+                                <input type="text" name="studentName2" id="studentName2">                        
                             </div>
                             <div>
                                 <label for="studentID2">Student ID: </label>
@@ -62,7 +64,7 @@
                         <div class="studentInputLine">
                             <div>
                                 <label for="studentName3">Student Name: </label>
-                                <input type="text" namd="studentName3" id="studentName3">                        
+                                <input type="text" name="studentName3" id="studentName3">                        
                             </div>
                             <div>
                                 <label for="studentID3">Student ID: </label>
@@ -70,8 +72,22 @@
                             </div>
                         </div>                        
                     </section>
+
+                    <template id="studentTemplate">
+                        <div class="studentInputLine">
+                            <div>
+                                <label for="studentName">Student Name: </label>
+                                <input type="text" name="studentName" id="studentName">
+                            </div>
+                            <div>
+                               <label for="studentID">Student ID: </label>
+                               <input type="text" name="studenID" id="studentID"> 
+                            </div>
+                        </div>
+                    </template>
+
                     <div>
-                        <input type="submit" value="Add Another Student">
+                        <input type="submit" id="addStudent" value="Add Another Student">
                     </div> 
                     <p>
                         <input type="submit" value="Submit Registrations">
