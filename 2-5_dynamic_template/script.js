@@ -21,5 +21,5 @@ addStudentButton = () => {
     studentName.name = "studentName" + studentCount;
     studentName.previousElementSibling.htmlFor =studentName.id;
 
-    studentContainer.addEventListener(newStudent);
+    studentContainer.addEventListener("click", addStudent);
 }
