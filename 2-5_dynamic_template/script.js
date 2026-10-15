@@ -4,7 +4,7 @@ const addStudentButton = document.getElementById("addStudent");
 
 let studentCount = 3;
 
-addStudentButton = () => {
+function addStudent() {
     const newStudent = studentTemplate.content.cloneNode(true);
 
     studentCount++;
@@ -18,8 +18,8 @@ addStudentButton = () => {
     studentName.previousElementSibling.htmlFor =studentName.id;
 
     studentID.id = "studentId" + studentCount;
-    studentName.name = "studentName" + studentCount;
-    studentName.previousElementSibling.htmlFor =studentName.id;
+    studentID.name = "studentName" + studentCount;
+    studentID.previousElementSibling.htmlFor =studentName.id;
 
-    studentContainer.addEventListener("click", addStudent);
+    addStudentButton.addEventListener("click", addStudent);
 }
