@@ -77,19 +77,28 @@
             registrations: []
         };
 
-        let membershipInfo = {
-            A1D2C4: "password1",
-            B2D4C6: "password2",
-            B3C2D1: "password3"
-        };
+
 
         document.addEventListener("DOMContentLoaded", () => {
+
+            let hitCount = document.cookie.split(";").find(row => row.startsWith("hitCounter="));
+
+            if(hitCount) {
+                hitCount = parseInt(hitCount.split("=")[1]) + 1;
+            }else {
+                hitCount = 1;
+            }
+            document.cookie = "hitCounter=" + hitCount + ";max-age=31536000;path=/";
+
+            document.getElementById("currentActivity").textContent = "Current Activity: " + hitCount;
+
+            document.getElementById("currentYear").textContent = new Date().getFullYear();
 
             let registrationForm = document.querySelector(".leftColumn form");
 
             registrationForm.addEventListener("submit", (event) => {
                 event.preventDefault();
-           
+
                 let newRegistration = {
                     name: document.getElementById("visitorName").value,
                     email: document.getElementById("visitorEmail").value,
@@ -104,19 +113,19 @@
                 console.log(eventRegistration);
             });
 
-           let signInButton = document.querySelector("nav > button");
+            let signInButton = document.querySelector("nav > button");
 
-           signInButton.addEventListener("click", () => {
+            signInButton.addEventListener("click", () => {
 
-            if(document.getElementById("signInContainer")) {
-                return;
-            }
+                if (document.getElementById("signInContainer")) {
+                    return;
+                }
 
-            let signInContainer = document.createElement("div");
+                let signInContainer = document.createElement("div");
 
-            signInContainer.id = "signInContainer";
+                signInContainer.id = "signInContainer";
 
-            signInContainer.innerHTML = `
+                signInContainer.innerHTML = `
             <form id="signInForm">
 
                 <h3>Member Sign In</h3>
@@ -135,18 +144,45 @@
 
                 </form>
            `;
-            
-           document.querySelector("nav").insertAdjacentElement("afterend", signInContainer);
+
+                document.querySelector("nav").insertAdjacentElement("afterend", signInContainer);
+
+                let signInForm = document.getElementById("signInForm");
+
+                signInForm.addEventListener("submit", (event) => {
+                    event.preventDefault();
+
+                    let userName = document.getElementById("memberUsername").value;
+                    let password = document.getElementById("memberPassword").value;
+
+                    let memberIndex = membersInfo.memberUserNames.indexOf(userName);
+
+                    if (memberIndex !== -1 && membersInfo.memberPasswords[memberIndex]
+                        === password) {
+
+                        document.cookie = "authorizedUser=" + userName + ";path=/";
+
+                        alert("Welcome! You are sucessfully signed in.");
+                    } else {
+                        alert("Incorrect username or password.")
+                    }
+                });
             });
         });
-        
-        let membersInfo = {
-            memberUserNames: [
-                "A1D2C4",
-                "B2D4C6",
-                "B3C2D1"
-            ]
-        }
+            let membersInfo = {
+                memberUserNames: [
+                    "A1D2C4",
+                    "B2D4C6",
+                    "B3C2D1"
+                ],
+
+                memberPasswords: [
+                    "bookclub1",
+                    "bookclub2",
+                    "bookclub3"
+                ]
+            };
+
     </script>
 </head>
 
@@ -207,8 +243,8 @@
         </main>
 
         <footer>
-            <p>Copyright &copy;YYYY All rights reserved.</p>
-            <p>Current Activity: ???</p>
+            <p>Copyright &copy; <span id="currentYear"></span> All rights reserved.</p>
+            <p id="currentActivity">Current Activity: ???</p>
         </footer>
 
     </div>
