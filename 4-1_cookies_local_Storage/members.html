@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,17 @@
         * {
             box-sizing: border-box;
         }
+
         body {
-            background-color:burlywood;
+            background-color: burlywood;
         }
+
         #container {
-            width:70%;
-            margin-left:auto;
-            margin-right:auto;
-            padding-left:15px;
-            padding-right:15px;
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
             background-color: chocolate;
         }
 
@@ -25,29 +28,30 @@
         }
 
         nav {
-            display:flex;
+            display: flex;
             justify-content: space-between;
-            margin-bottom:15px;
+            margin-bottom: 15px;
         }
 
         main {
-            display:flex;
+            display: flex;
         }
 
         main section {
-            width:50%;
-            border:thin solid black;
+            width: 50%;
+            border: thin solid black;
 
         }
 
-        section h2, section h3 {
+        section h2,
+        section h3 {
             text-align: center;
         }
 
         form {
             width: 70%;
-            margin-left:auto;
-            margin-right:auto;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         footer p {
@@ -55,7 +59,7 @@
         }
 
         .pageHeader {
-            color:blue;
+            color: blue;
         }
     </style>
     <script>
@@ -71,15 +75,75 @@
         //
         //4. Display Cookie button should show the current cookies in the console
         //5. Delete Cookie button should delete the authorization
-let authorizedUser = document.cookie
-.split("; ")
-.find(cookie => cookie.startsWith("authorizedUser="));
+        let authorizedUser = document.cookie
+            .split("; ")
+            .find(cookie => cookie.startsWith("authorizedUser="));
 
-if(!authorizedUser) {
-    window.location.href = "index.html";
-}
+        if (!authorizedUser || authorizedUser.split("=")[1] === "") {
+            window.location.href = "index.html";
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            let displayCookieButton = document.querySelector(".leftColumn button");
+
+            displayCookieButton.addEventListener("click", () => {
+                console.log(document.cookie);
+
+                let deleteCookieButton = document.querySelectorAll(".leftColumn button")[1];
+
+                deleteCookieButton.addEventListener("click", () => {
+                    document.cookie = "authorizedUser=; max-age=0; path=/";
+
+                    alert("Authorization cookie deleted.");
+
+                    window.location.href = "index.html"
+                });
+
+                let hitCount = document.cookie.split(";").find(cookie => cookie.startsWith("hitCounter="));
+
+                if (hitCount) {
+                    hitCount = hitCount.split("=")[1];
+
+                } else {
+                    hitCount = 0;
+                }
+                document.getElementById("currentActivity").textContent = "Current Activity:" + hitCount;
+
+                document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+                let savedRegistrations = JSON.parse(localStorage.getItem("eventRegistration"));
+
+                let registrationDisplay = document.querySelector(".rightColumn div:last-child");
+
+                if (savedRegistrations && savedRegistrations.registrations && savedRegistrations.registrations.length > 0) {
+
+                    let registrationList = document.createElement("ol");
+
+                    savedRegistrations.registrations.forEach((registration) => {
+
+                        let guest = document.createElement("li");
+
+                        guest.textContent = registration.name + "-" +
+                            registration.email + "-" +
+                            registration.phone + "-" +
+                            registration.registrationDate;
+
+                        registrationList.appendChild(guest);
+                    });
+
+                    registrationDisplay.appendChild(registrationList);
+                } else {
+                    let noRegistrations = document.createElement("p");
+
+                    noRegistrations.textContent = "No current registrations";
+
+                    registrationDisplay.appendchild(noRegistrations);
+                };
+            });
+        });
     </script>
 </head>
+
 <body>
     <div id="container">
 
@@ -116,10 +180,11 @@ if(!authorizedUser) {
         </main>
 
         <footer>
-            <p>Copyright &copy;YYYY All rights reserved.</p>
-            <p>Current Activity: ???</p>
+            <p>Copyright &copy;<span id="currentYear"></span> All rights reserved.</p>
+            <p id="currentActivity">Current Activity: ???</p>
         </footer>
 
     </div>
 </body>
+
 </html>
