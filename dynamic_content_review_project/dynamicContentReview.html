@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,19 +9,20 @@
         body {
             background-color: darkgoldenrod;
         }
+
         #container {
-            width:80%;
-            margin-left:auto;
-            margin-right:auto;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
             background-color: bisque;
-            padding-left:5px;
-            padding-right:5px;
+            padding-left: 5px;
+            padding-right: 5px;
         }
 
         .displayGameLibrary {
-            margin-top:20px;
-            padding:5px;
-            border:thin solid black;
+            margin-top: 20px;
+            padding: 5px;
+            border: thin solid black;
             background-color: blanchedalmond;
         }
 
@@ -33,13 +35,13 @@
 
         //1. Use the following parallel arrays to dynamically populate the select element
         const gameTypes = ["board", "video", "tabletop", "rpg"];
-        const gameTypeAbb = ['b','v','t','r'];
+        const gameTypeAbb = ['b', 'v', 't', 'r'];
 
         //2. Use the following array to dynamically create a set of radio buttons
-        const gameDifficulty = ["Easy","Moderate","Difficult","Hard"];
+        const gameDifficulty = ["Easy", "Moderate", "Difficult", "Hard"];
 
         //3. Use the following array to dynamically create a set of checkboxes
-        const gameOptions = ["Good for Kids","Multiplayer","Fast Play","Long Game","Solitaire"];
+        const gameOptions = ["Good for Kids", "Multiplayer", "Fast Play", "Long Game", "Solitaire"];
 
         document.addEventListener("DOMContentLoaded", () => {
 
@@ -91,7 +93,7 @@
                 checkBox.type = "checkbox";
                 checkBox.name = "gameOptions";
                 checkBox.id = "option" + index;
-                checkBox.value = option; 
+                checkBox.value = option;
 
                 let label = document.createElement("label");
 
@@ -112,7 +114,7 @@
 
                 let gameName = document.getElementById("gameName").value.trim();
 
-                if(gameName === "") {
+                if (gameName === "") {
                     alert("Game Name cannot be blank");
                     return false;
                 }
@@ -141,7 +143,7 @@
             //Number of Players Validation
             const validateGamePlayers = () => {
 
-                let players=document.getElementById("gamePlayers").value.trim();
+                let players = document.getElementById("gamePlayers").value.trim();
 
                 let playerCount = Number(players);
 
@@ -156,7 +158,7 @@
                 }
 
                 if (playerCount < 1 || playerCount > 20) {
-                    alert("number of Playuers must be between 1 and 20.");
+                    alert("Number of Playuers must be between 1 and 20.");
                     return false;
                 }
 
@@ -187,23 +189,23 @@
                     alert("You cannot select both Fast Play and Long Game.");
                     return false;
                 }
-                
+
                 return true;
             };
 
             //Create the game object
-                const createGame = (name, type, players, difficulty, selectedOptions) => {
-                   
-                    const game = {
-                        gameName: name,
-                        gameType: type,
-                        numberOfPlayers: players,
-                        difficultyRating: difficulty,
-                        gameOptions: selectedOptions
-                    };
+            const createGame = (name, type, players, difficulty, selectedOptions) => {
 
-                    return game;
+                const game = {
+                    gameName: name,
+                    gameType: type,
+                    numberOfPlayers: players,
+                    difficultyRating: difficulty,
+                    gameOptions: selectedOptions
                 };
+
+                return game;
+            };
 
             //Run all Validation Functions
             const validateGameForm = () => {
@@ -212,42 +214,57 @@
                     return false;
                 }
 
-                if(!validateGameType()) {
+                if (!validateGameType()) {
                     return false;
                 }
 
-                if(!validateGamePlayers()) {
+                if (!validateGamePlayers()) {
                     return false;
                 }
 
-                if(!validateDifficulty()) {
+                if (!validateDifficulty()) {
                     return false;
                 }
 
-                if(!validateGameOptions()) {
+                if (!validateGameOptions()) {
                     return false;
                 }
 
                 return true;
             };
 
-            
-
-            
-            });
-
-            //Form Processing
+            //Form Processing LEFT OFF WITH LAST NIGHT
             let gameForm = document.querySelector("form");
 
-            //Find the Game Library display area
+            //find the game library display area
             let gameLibraryDisplay = document.querySelector(".displayGameLibrary");
+
+            //Start Over Buttons
+            let resetButtons = document.querySelectorAll('input[type="reset"]');
+
+            resetButtons.forEach((button) => {
+
+                button.addEventListener("click", (event) => {
+
+                    if (event.currentTarget.value === "Start Over") {
+
+                        //Clear the game library data
+                        gameLibrary.games = [];
+
+                        //Clear the displayed games
+                        gameLibraryDisplay.innerHTML = "<h3>Game Library</h3>";
+
+                        console.log("Game Library has been cleared.");
+                    }
+                });
+            });
 
             gameForm.addEventListener("submit", (event) => {
                 event.preventDefault();
 
-                if(event.submitter.value === "Add Game to Library") {
+                if (event.submitter.value === "Add Game to Library") {
 
-                    if(validateGameForm()) {
+                    if (validateGameForm()) {
 
                         //Gather game name
                         let gameName = document.getElementById("gameName").value.trim();
@@ -263,7 +280,7 @@
 
                         //Gather Game Options
                         let selectedOptions = [];
-                        
+
                         let checkedOptions = document.querySelectorAll('input[name="gameOptions"]:checked');
 
                         checkedOptions.forEach((option) => {
@@ -284,13 +301,48 @@
 
                         alert("Game successfully added to the library!")
                     };
-                };
+                }
 
                 //Display the Game Library
-                else if(event.submitter)
+                else if (event.submitter.value === "Display Game Library") {
+
+                    //Clear previous display
+                    gameLibraryDisplay.innerHTML = "<h3>Game Library</h3>";
+
+                    //Loop through all games
+                    gameLibrary.games.forEach((game, index) => {
+
+                        let gameEntry = document.createElement("div");
+
+                        let gameHeading = document.createElement("h4");
+                        gameHeading.textContent = (index + 1) + "." + game.gameName;
+
+                        let gameDetails = document.createElement("p");
+
+                        gameDetails.textContent =
+                            "Game Type: " + game.gameType +
+                            "|Players: " + game.numberOfPlayers +
+                            "|Difficulty: " + game.difficultyRating +
+                            "|Options: " + (game.gameOptions.length > 0 ? game.gameOptions.join(",") : "None");
+
+                        gameEntry.appendChild(gameHeading);
+                        gameEntry.appendChild(gameDetails);
+
+                        gameLibraryDisplay.appendChild(gameEntry);
+                    });
+
+                    //Display message if library is empty
+                    if (gameLibrary.games.length === 0) {
+                        gameLibraryDisplay.innerHTML += "<p>No games have been added yet.</p>";
+                    }
+                }
+            });
+
+
         });
     </script>
 </head>
+
 <body>
     <div id="container">
         <header>
@@ -303,7 +355,7 @@
                     <legend>Game Input</legend>
                     <p>
                         <label for="gameName">Game Name:</label>
-                        <input type="text" id="gameName" name="gameName" placehoder="Game Name">
+                        <input type="text" id="gameName" name="gameName" placeholder="Game Name">
                     </p>
                     <p>
                         <label for="gameType">Game Type:</label>
@@ -341,50 +393,54 @@
                 <h3>Instructions:</h3>
                 <p>
                     Dynamic Content:
-                    <ol>
-                        <li>Use the provided arrays to dynamically populate the Game Type. Include the abbreviations as value attritubes.</li>
-                        <li>Use the provided array to dynamically create a set of radio buttons for Diffulty Rating.</li>
-                        <li>Use the provided array to dynamically create a set of checkboxes for Game Options.</li>
-                        <li>Dynamically load the Copyright year in the footer so that is always the current year.</li>
-                    </ol>
+                <ol>
+                    <li>Use the provided arrays to dynamically populate the Game Type. Include the abbreviations as
+                        value attritubes.</li>
+                    <li>Use the provided array to dynamically create a set of radio buttons for Diffulty Rating.</li>
+                    <li>Use the provided array to dynamically create a set of checkboxes for Game Options.</li>
+                    <li>Dynamically load the Copyright year in the footer so that is always the current year.</li>
+                </ol>
                 </p>
                 <p>
                     Data Validation:
-                    <ol>
-                        <li>Game Name - cannot be blank, max 50 characters</li>
-                        <li>Game Type - one must be selected</li>
-                        <li>Number of Players - must be numeric, 1+, max of 20, whole number</li>
-                        <li>Difficulty Rating - one must be selected</li>
-                        <li>Game Options:  Some, none or all may be selected</li>
-                        <li>Game Options: "Fast Play" and "Long Game" cannot both be selected</li>
-                    </ol>
+                <ol>
+                    <li>Game Name - cannot be blank, max 50 characters</li>
+                    <li>Game Type - one must be selected</li>
+                    <li>Number of Players - must be numeric, 1+, max of 20, whole number</li>
+                    <li>Difficulty Rating - one must be selected</li>
+                    <li>Game Options: Some, none or all may be selected</li>
+                    <li>Game Options: "Fast Play" and "Long Game" cannot both be selected</li>
+                </ol>
                 </p>
                 <p>
                     Data Storage:
-                    <ol>
-                        <li>Create an object called game for storing the game information. Use a class or object literal.</li>
-                        <li>The game object must allow for any/all selected content.</li>
-                        <li>Create an object called gameLibrary. It will store an array of game objects.</li>
-                    </ol>
+                <ol>
+                    <li>Create an object called game for storing the game information. Use a class or object literal.
+                    </li>
+                    <li>The game object must allow for any/all selected content.</li>
+                    <li>Create an object called gameLibrary. It will store an array of game objects.</li>
+                </ol>
                 </p>
                 <p>
                     Form Processing:
-                    <ol>
-                        <li>When the form is submitted by the "Add Game to Library" AND all fields pass validations gather the form data.</li>
-                        <li>Load the game data into a game object</li>
-                        <li>Display the game object in the console</li>
-                        <li>Add the game object to the gameLibrary</li>
-                        <li>Display the gameLibrary in the console</li>
-                        <li>"New Game" button should clear the form entries</li>
-                        <li>"Start Over" button should clear the form, the display and the data.</li>
-                    </ol>
+                <ol>
+                    <li>When the form is submitted by the "Add Game to Library" AND all fields pass validations gather
+                        the form data.</li>
+                    <li>Load the game data into a game object</li>
+                    <li>Display the game object in the console</li>
+                    <li>Add the game object to the gameLibrary</li>
+                    <li>Display the gameLibrary in the console</li>
+                    <li>"New Game" button should clear the form entries</li>
+                    <li>"Start Over" button should clear the form, the display and the data.</li>
+                </ol>
                 </p>
                 <p>
                     Display Game Library:
-                    <ol>
-                        <li>When the "Display Game Library" button is clicked display each game in the game library in the Game Library Area.</li>
-                        <li>Design your own layout and styling for to display the games.</li>
-                    </ol>
+                <ol>
+                    <li>When the "Display Game Library" button is clicked display each game in the game library in the
+                        Game Library Area.</li>
+                    <li>Design your own layout and styling for to display the games.</li>
+                </ol>
                 </p>
             </div>
         </main>
@@ -393,4 +449,5 @@
         </footer>
     </div>
 </body>
+
 </html>
