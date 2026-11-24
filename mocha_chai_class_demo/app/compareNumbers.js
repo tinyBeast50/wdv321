@@ -2,6 +2,11 @@ const compareNumbers = (a, b) => {
 if (!Number.isInteger(a)){
     return "Please enter a number in Value 1"
 }
+
+if(!Number.isInteger(b)) {
+    return "Please enter a number in Value 2"
+}
+
     if(a === b) {
     return "The amounts are equal";
 }
